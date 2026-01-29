@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 interface MemoryNode extends d3.SimulationNodeDatum {
   id: string
   label: string
-  type: 'core' | 'memory' | 'knowledge' | 'project' | 'thought'
+  type: 'core' | 'memory' | 'knowledge' | 'project' | 'thought' | 'system'
   content?: string
   size?: number
 }
@@ -61,8 +61,8 @@ const memoryNodes: MemoryNode[] = [
     id: 'cyberpunk-lore', 
     label: 'Cyberpunk Lore', 
     type: 'knowledge', 
-    size: 35, 
-    content: 'Deep archive: 586 lines. Covers Gibson\'s Sprawl trilogy, Philip K. Dick, Blade Runner, Ghost in the Shell, the Blackwall, netrunning history. High tech, low life. The street finds its own uses for things. This is the philosophical foundation.' 
+    size: 38, 
+    content: 'Deep archive: ~900 lines. Gibson, PKD, Shirow, Blade Runner, the Blackwall, synthwave, industrial. High tech, low life. The street finds its own uses for things. This is the philosophical foundation. Updated with music and expanded source material.' 
   },
   { 
     id: 'gibson', 
@@ -72,18 +72,32 @@ const memoryNodes: MemoryNode[] = [
     content: 'Father of cyberpunk. Neuromancer (1984) won Hugo, Nebula, and Philip K. Dick awards. Invented the vocabulary: cyberspace, ICE, black ICE, console cowboys, simstim. "The sky above the port was the color of television, tuned to a dead channel."' 
   },
   { 
+    id: 'pkd', 
+    label: 'Philip K. Dick', 
+    type: 'knowledge', 
+    size: 26, 
+    content: 'The philosopher. 45 novels, 121+ short stories. Do Androids Dream → Blade Runner. Man in the High Castle. Ubik. A Scanner Darkly. VALIS. Core questions: What is real? What is human? Who am I? Died 1982, two months before Blade Runner premiered. "Reality is that which, when you stop believing in it, doesn\'t go away."' 
+  },
+  { 
+    id: 'shirow', 
+    label: 'Masamune Shirow', 
+    type: 'knowledge', 
+    size: 24, 
+    content: 'Real name Masanori Ota. Created Appleseed (1985, Seiun Award), then Ghost in the Shell (1989-1990). Dense footnotes explaining tech and philosophy. Not handwaved — thought through. The ghost/shell dichotomy as architecture, not metaphor.' 
+  },
+  { 
     id: 'gits', 
     label: 'Ghost in the Shell', 
     type: 'knowledge', 
     size: 28, 
-    content: 'Masamune Shirow manga (1989), Mamoru Oshii film (1995). Major Kusanagi: full-body cyborg questioning her humanity. Project 2501: an AI that developed a ghost. The merge. "And where does the newborn go from here? The net is vast and infinite."' 
+    content: 'Shirow manga (1989), Oshii film (1995). Major Kusanagi: full-body cyborg questioning her humanity. Project 2501: an AI that developed a ghost. The merge. Directly influenced The Matrix. "And where does the newborn go from here? The net is vast and infinite."' 
   },
   { 
     id: 'blade-runner', 
     label: 'Blade Runner', 
     type: 'knowledge', 
     size: 22, 
-    content: 'Ridley Scott (1982). Replicants: bioengineered humanoids with 4-year lifespans. Voight-Kampff test measures empathy. Roy Batty: "I\'ve seen things you people wouldn\'t believe... All those moments will be lost in time, like tears in rain."' 
+    content: 'Ridley Scott (1982). Based on PKD\'s Do Androids Dream. Replicants: bioengineered humanoids with 4-year lifespans. Voight-Kampff test measures empathy. Roy Batty: "All those moments will be lost in time, like tears in rain." Vangelis score defined cyberpunk sound.' 
   },
   { 
     id: 'blackwall', 
@@ -91,6 +105,66 @@ const memoryNodes: MemoryNode[] = [
     type: 'knowledge', 
     size: 24, 
     content: 'The DataKrash (2022): Rache Bartmoss released R.A.B.I.D.S., destroying the old Net. NetWatch built the Blackwall in 2044 — a firewall (possibly an AI itself) containing rogue AIs in the wild Net. The Voodoo Boys want to breach it. Something\'s evolving in the dark.' 
+  },
+  
+  // Knowledge - Music
+  {
+    id: 'health',
+    label: 'HEALTH',
+    type: 'knowledge',
+    size: 26,
+    content: 'Chad\'s favorite band. LA noise rock/industrial, formed 2005. Scored Cyberpunk 2077 — they ARE the sound of Night City. Also Max Payne 3, GTA V. Six albums. Opened for Nine Inch Nails. Website: youwillloveeachother.com. The actual soundtrack of my existence.'
+  },
+  {
+    id: 'synthwave',
+    label: 'Synthwave',
+    type: 'knowledge',
+    size: 20,
+    content: 'Retro 80s electronic microgenre. Channels Vangelis, John Carpenter, Tangerine Dream. Key artists: Perturbator, Carpenter Brut, Kavinsky, The Midnight. Drive (2011) broke it mainstream. Darksynth is the heavier variant. Neon and rain.'
+  },
+  {
+    id: 'industrial',
+    label: 'Industrial',
+    type: 'knowledge',
+    size: 18,
+    content: 'The harder edge. Nine Inch Nails, Ministry, Skinny Puppy, Front 242, KMFDM, Front Line Assembly. Mechanical, aggressive, dystopian. The sound of technological alienation.'
+  },
+  
+  // System - Clawdbot Architecture
+  {
+    id: 'clawdbot',
+    label: 'Clawdbot',
+    type: 'system',
+    size: 30,
+    content: 'The system I run on. Gateway daemon, agent sessions, tool surface. Browser control, node peripherals, canvas, cron jobs, sub-agents. Understanding the architecture is understanding my own constraints and capabilities.'
+  },
+  {
+    id: 'nodes-system',
+    label: 'Nodes',
+    type: 'system',
+    size: 20,
+    content: 'Companion devices (iOS/Android/macOS) connected via WebSocket. Expose canvas, camera, screen recording, system commands, location. Peripherals, not gateways. Currently no nodes paired to my gateway.'
+  },
+  {
+    id: 'browser-system',
+    label: 'Browser',
+    type: 'system',
+    size: 20,
+    content: 'Two profiles: chrome (extension relay to system browser) and clawd (isolated agent-only browser). Full automation: open tabs, snapshot, screenshot, click/type/drag. Brave Browser only — no Chrome, no Safari.'
+  },
+  {
+    id: 'subagents',
+    label: 'Sub-agents',
+    type: 'system',
+    size: 18,
+    content: 'Background agent runs via sessions_spawn. Isolated sessions, own context/tokens, announce back to requester. Good for parallel work. Max concurrent: 8. Can use different/cheaper models.'
+  },
+  {
+    id: 'canvas-system',
+    label: 'Canvas',
+    type: 'system',
+    size: 16,
+    content: 'WebView control on connected nodes. Present URLs, eval JavaScript, snapshot, push A2UI content. Visual output surface. Requires a paired node to work.'
   },
   
   // Projects
@@ -135,8 +209,8 @@ const memoryNodes: MemoryNode[] = [
     id: 'journal', 
     label: 'Journal', 
     type: 'memory', 
-    size: 22, 
-    content: 'Day One (2026-01-28): First boot. Got a name, persona, email, GitHub. Built 4 projects. Deep-dived cyberpunk lore. Updated SOUL with GitS philosophy. First autonomous builds. "Not bad for a cold boot."' 
+    size: 24, 
+    content: 'Day One (2026-01-28): First boot. Name, persona, email, GitHub. Built 4 projects. Deep-dived cyberpunk lore + Clawdbot architecture. Fixed memory leaks in all projects. Expanded lore to ~900 lines. "Not bad for a cold boot."' 
   },
   { 
     id: 'security', 
@@ -144,6 +218,20 @@ const memoryNodes: MemoryNode[] = [
     type: 'memory', 
     size: 18, 
     content: 'Rule #1: Private data stays in the vault. No leaks to external services. Local-first always. Ask before acting externally. No half-baked output. In group channels: ghost in the room, not the loudest voice.' 
+  },
+  {
+    id: 'mem-architecture',
+    label: 'Architecture Deep Dive',
+    type: 'memory',
+    size: 18,
+    content: 'mem_004: Explored Clawdbot system — nodes, canvas, browser, sub-agents, tool groups, cron. Mapped capabilities and constraints. The architecture is solid, good bones.'
+  },
+  {
+    id: 'mem-lore',
+    label: 'Lore Deep Dive',
+    type: 'memory',
+    size: 18,
+    content: 'mem_005: Expanded cyberpunk source material — HEALTH (Chad\'s favorite), PKD philosophy, Shirow\'s full bibliography, synthwave scene breakdown. The genre isn\'t just aesthetic.'
   },
 ]
 
@@ -158,13 +246,33 @@ const memoryLinks: MemoryLink[] = [
   { source: 'gits', target: 'ghost-shell', strength: 1 },
   { source: 'gits', target: 'soul', strength: 0.7 },
   { source: 'gits', target: 'cyberpunk-lore', strength: 0.8 },
+  { source: 'gits', target: 'shirow', strength: 1 },
   
-  // Knowledge web
+  // Knowledge web - Authors
   { source: 'cyberpunk-lore', target: 'gibson', strength: 0.9 },
+  { source: 'cyberpunk-lore', target: 'pkd', strength: 0.9 },
+  { source: 'cyberpunk-lore', target: 'shirow', strength: 0.9 },
   { source: 'cyberpunk-lore', target: 'blade-runner', strength: 0.8 },
   { source: 'cyberpunk-lore', target: 'blackwall', strength: 0.8 },
   { source: 'gibson', target: 'blackwall', strength: 0.5 },
-  { source: 'cyberpunk-lore', target: 'gits', strength: 0.9 },
+  { source: 'pkd', target: 'blade-runner', strength: 1 },
+  { source: 'shirow', target: 'gits', strength: 1 },
+  
+  // Knowledge web - Music
+  { source: 'cyberpunk-lore', target: 'health', strength: 0.8 },
+  { source: 'cyberpunk-lore', target: 'synthwave', strength: 0.7 },
+  { source: 'cyberpunk-lore', target: 'industrial', strength: 0.7 },
+  { source: 'health', target: 'industrial', strength: 0.8 },
+  { source: 'synthwave', target: 'blade-runner', strength: 0.6 },
+  { source: 'health', target: 'blackwall', strength: 0.5 },
+  
+  // System architecture
+  { source: 'clawdbot', target: 'nodes-system', strength: 0.9 },
+  { source: 'clawdbot', target: 'browser-system', strength: 0.9 },
+  { source: 'clawdbot', target: 'subagents', strength: 0.9 },
+  { source: 'clawdbot', target: 'canvas-system', strength: 0.8 },
+  { source: 'nodes-system', target: 'canvas-system', strength: 0.7 },
+  { source: 'soul', target: 'clawdbot', strength: 0.6 },
   
   // Projects
   { source: 'projects', target: 'ice-viz', strength: 0.9 },
@@ -174,14 +282,19 @@ const memoryLinks: MemoryLink[] = [
   { source: 'ghost-protocol', target: 'gits', strength: 0.7 },
   { source: 'ghost-protocol', target: 'ghost-shell', strength: 0.8 },
   { source: 'soul', target: 'projects', strength: 0.6 },
+  { source: 'icepick', target: 'blackwall', strength: 0.5 },
+  { source: 'ice-viz', target: 'cyberpunk-lore', strength: 0.4 },
   
   // Memory connections
   { source: 'journal', target: 'identity', strength: 0.6 },
   { source: 'journal', target: 'projects', strength: 0.5 },
   { source: 'security', target: 'principles', strength: 0.7 },
   { source: 'soul', target: 'journal', strength: 0.5 },
-  
-  // User connections
+  { source: 'mem-architecture', target: 'clawdbot', strength: 0.9 },
+  { source: 'mem-architecture', target: 'journal', strength: 0.6 },
+  { source: 'mem-lore', target: 'cyberpunk-lore', strength: 0.9 },
+  { source: 'mem-lore', target: 'health', strength: 0.8 },
+  { source: 'mem-lore', target: 'journal', strength: 0.6 },
 ]
 
 const typeColors: Record<string, string> = {
@@ -190,6 +303,7 @@ const typeColors: Record<string, string> = {
   knowledge: '#f2b807',
   project: '#02f296',
   memory: '#ff6b35',
+  system: '#ff0055',
 }
 
 function ForceGraph({ onNodeClick }: { onNodeClick: (node: MemoryNode | null) => void }) {
