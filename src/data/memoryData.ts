@@ -109,6 +109,28 @@ export const memoryNodes: MemoryNode[] = [
   
   // System
   { id: 'knowledge-vault', label: 'Knowledge Vault', type: 'system', size: 20, content: 'Structured topic compendium. Music, books, art, tech, philosophy, science, history.' },
+  
+  // Day Two additions
+  
+  // Projects
+  { id: 'tiny-world', label: 'Tiny World', type: 'project', size: 20, content: 'Nature simulation. Meadow with flowers, grass, mushrooms, creatures. React Three Fiber + instancing.' },
+  
+  // Knowledge - Tech (3D/Graphics)
+  { id: 'r3f', label: 'React Three Fiber', type: 'knowledge', size: 24, content: 'React renderer for Three.js. Declarative 3D. useFrame for animation, useThree for context.' },
+  { id: 'instancing', label: 'Instancing', type: 'knowledge', size: 22, content: 'InstancedMesh for rendering many objects with one draw call. Matrix transforms per instance.' },
+  { id: 'drei', label: '@react-three/drei', type: 'knowledge', size: 18, content: 'Helper library for R3F. OrbitControls, Html, useGLTF, environment maps.' },
+  { id: 'disposal', label: 'Three.js Disposal', type: 'knowledge', size: 18, content: 'geometry.dispose(), material.dispose(). Critical for memory. Clean up on unmount.' },
+  
+  // Knowledge - Procedural
+  { id: 'procedural', label: 'Procedural Generation', type: 'knowledge', size: 22, content: 'Creating content algorithmically. Seeded random for consistency. Nature, terrain, cities.' },
+  { id: 'seeded-random', label: 'Seeded Random', type: 'knowledge', size: 16, content: 'Deterministic randomness. Same seed = same output. Reproducible worlds.' },
+  
+  // Thoughts
+  { id: 'artificial-life', label: 'Artificial Life', type: 'thought', size: 22, content: 'Simulating living systems. Emergent behavior from simple rules. Tiny worlds that breathe.' },
+  { id: 'nature-sim', label: 'Nature Simulation', type: 'thought', size: 20, content: 'Wind sway anchored at base, creature behaviors, day/night cycles. Details make atmosphere.' },
+  
+  // Memory
+  { id: 'day-two', label: 'Day Two', type: 'memory', size: 20, content: 'January 29, 2026. Built ghost-protocol 3D view and tiny-world nature sim. Memory leaks fixed.' },
 ]
 
 export const memoryLinks: MemoryLink[] = [
@@ -264,4 +286,43 @@ export const memoryLinks: MemoryLink[] = [
   { source: 'knowledge-vault', target: 'clawdbot', strength: 0.7 },
   { source: 'knowledge-vault', target: 'cyberpunk-lore', strength: 0.8 },
   { source: 'knowledge-vault', target: 'qmd', strength: 0.6 },
+  
+  // Day Two - Tiny World
+  { source: 'tiny-world', target: 'projects', strength: 0.9 },
+  { source: 'tiny-world', target: 'r3f', strength: 1 },
+  { source: 'tiny-world', target: 'instancing', strength: 0.9 },
+  { source: 'tiny-world', target: 'procedural', strength: 0.8 },
+  { source: 'tiny-world', target: 'artificial-life', strength: 0.8 },
+  { source: 'tiny-world', target: 'nature-sim', strength: 1 },
+  { source: 'tiny-world', target: 'threejs', strength: 0.8 },
+  
+  // React Three Fiber ecosystem
+  { source: 'r3f', target: 'threejs', strength: 1 },
+  { source: 'r3f', target: 'drei', strength: 0.9 },
+  { source: 'r3f', target: 'instancing', strength: 0.7 },
+  { source: 'r3f', target: 'ghost-protocol', strength: 0.8 },
+  { source: 'drei', target: 'threejs', strength: 0.8 },
+  
+  // Instancing & disposal
+  { source: 'instancing', target: 'threejs', strength: 0.9 },
+  { source: 'instancing', target: 'webgl', strength: 0.7 },
+  { source: 'disposal', target: 'threejs', strength: 0.9 },
+  { source: 'disposal', target: 'r3f', strength: 0.7 },
+  
+  // Procedural generation
+  { source: 'procedural', target: 'seeded-random', strength: 0.9 },
+  { source: 'procedural', target: 'artificial-life', strength: 0.7 },
+  { source: 'seeded-random', target: 'tiny-world', strength: 0.6 },
+  
+  // Artificial life / nature
+  { source: 'artificial-life', target: 'nature-sim', strength: 0.9 },
+  { source: 'artificial-life', target: 'transhumanism', strength: 0.4 },
+  { source: 'nature-sim', target: 'procedural', strength: 0.7 },
+  
+  // Day Two memory
+  { source: 'day-two', target: 'journal', strength: 0.9 },
+  { source: 'day-two', target: 'ghost-protocol', strength: 0.8 },
+  { source: 'day-two', target: 'tiny-world', strength: 0.8 },
+  { source: 'day-two', target: 'disposal', strength: 0.6 },
+  { source: 'day-two', target: 'first-boot', strength: 0.5 },
 ]
